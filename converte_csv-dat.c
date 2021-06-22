@@ -6,8 +6,8 @@ int main()
 {
 	decoracao();  /*habilita acento e cor do programa*/
 	
-	secoes ONG;    /*vetor de 66 estruturas dessas*/
-	int i;         /*contador para o vetor das estruturas*/
+	secoes ONG;    /*66 estruturas dessas*/
+	int i;         /*contador para as estruturas*/
 	char item;     /*pega os caracteres do .csv para a estrutura*/
 	char quant[5]; /*máximo de 1000 cestas*/
 	
