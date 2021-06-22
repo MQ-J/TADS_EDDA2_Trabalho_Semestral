@@ -3,11 +3,12 @@
 #include <stdlib.h> /*para usar funcao system*/
 #include <locale.h> /*para usar funcao setlocale*/
 #include <string.h> /*para usar fgets e afins*/
+#include <conio.h>  /*para usar gets e afins*/
 
 /* DEFINIÇÕES */
 #define enti_max   116 /*o maior tem 116 caracteres*/
 #define cnpj_max   14  /*CNPJ tem 14 numeros*/
-#define email_max  42  /*o maior tem 42*/
+#define email_max  100 /*o maior tem 42*/
 #define telefo_max 11  /*11 caracteres*/
 #define comuni_max 25  /*o maior tem 25*/
 #define endere_max 93  /*o maior tem 93*/
