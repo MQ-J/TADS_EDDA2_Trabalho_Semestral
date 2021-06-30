@@ -12,22 +12,14 @@ int main()
 	char quant[5]; /*máximo de 1000 cestas*/
 	
 	
-	FILE * csv = fopen("OSC.csv", "r"); /*abre para ler*/
-	FILE * dat = fopen("OSC.dat", "wb");/*abre como binário*/
-	fseek(csv, 112, SEEK_SET);          /*pula o cabeçalho do .csv*/
+	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv);/*abre para ler*/
+	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat);/*abre como binário*/
+	fseek(csv, 112, SEEK_SET);                           /*pula o cabeçalho do .csv*/
 	
 	while(!feof(csv)) /*looping para ler o .csv e copiar para a estrutura*/
 	{
 		//limpa a estrutura
-		memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
-		memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
-		memset(ONG.Email,      '\0', sizeof(ONG.Email));
-		memset(ONG.Telefone,   '\0', sizeof(ONG.Telefone));
-		memset(ONG.Comunidade, '\0', sizeof(ONG.Comunidade));
-		memset(ONG.Endereco,   '\0', sizeof(ONG.Endereco));
-		memset(ONG.Tipo,       '\0', sizeof(ONG.Tipo));
-		memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
-		ONG.Quant_cesta = 0;
+		limpa_estrutura(ONG);
 		
 		//entidade
 		i = 0;
