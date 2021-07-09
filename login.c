@@ -4,17 +4,25 @@
 /* FUNCÕES */
 int login(secoes* ONG, int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 {
-	int i;
+	int i; /*percorre estruturas*/
+	int j; /*percorre emails e cnpjs*/
 	
-	for (i=0; i<quant; i++)
-	{
-		printf("Comparando CNPJ: %s com %s\n", ONG[i].CNPJ, cnpj);
-		printf("Comparando EMAIL: %s com %s\n\n", ONG[i].Email, email);
-		
-		if((ONG[i].CNPJ == cnpj) && (ONG[i].Email == email)) /*verifica senhas*/
-		return(0);                                           /*autoriza acesso*/
+	for(i=0; i<quant; i++)
+	{	
+		for(j=0; j<email_max+1; j++)
+		{
+			printf("%c e %c\n", ONG[i].Email[j], email[j]);
+			if(ONG[i].Email[j] == email[j])
+			{
+				for(j=0; j<cnpj_max+1; j++)
+				{
+					printf("%c e %c\n", ONG[i].CNPJ[j], cnpj[j]);
+					if(ONG[i].CNPJ[j]  != cnpj[j])  return(1);
+				}
+				return(0); /*autoriza acesso*/
+			}
+		}
 	}
-	return(1); /*não autoriza acesso*/
 }
 
 void consulta(secoes* ONG, int quant)
