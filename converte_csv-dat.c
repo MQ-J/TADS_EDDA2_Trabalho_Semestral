@@ -1,39 +1,33 @@
 /* BIBLIOTECA */
 #include "biblio_geral.h"
 
-/* FUNÇÕES */
-void limpa_estrutura(secoes ONG)
-{
-	memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
-	memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
-	memset(ONG.Email,      '\0', sizeof(ONG.Email));
-	memset(ONG.Telefone,   '\0', sizeof(ONG.Telefone));
-	memset(ONG.Comunidade, '\0', sizeof(ONG.Comunidade));
-	memset(ONG.Endereco,   '\0', sizeof(ONG.Endereco));
-	memset(ONG.Tipo,       '\0', sizeof(ONG.Tipo));
-	memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
-	ONG.Quant_cesta = 0;
-}
 
 /* CORPO DO PROGRAMA */
 int main()
 {
 	decoracao();  /*habilita acento e cor do programa*/
 	
-	secoes ONG;    /*66 estruturas dessas*/
+	secoes ONG;    /*variável das estruturas*/
 	int i;         /*contador para as estruturas*/
 	char item;     /*pega os caracteres do .csv para a estrutura*/
 	char quant[5]; /*máximo de 1000 cestas*/
 	
-	
-	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv);/*abre para ler*/
-	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat);/*abre como binário*/
-	fseek(csv, 112, SEEK_SET);                           /*pula o cabeçalho do .csv*/
+	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv); /*abre para ler*/
+	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat); /*abre como binário*/
+	fseek(csv, 112, SEEK_SET);                            /*pula o cabeçalho do .csv*/
 	
 	while(!feof(csv)) /*looping para ler o .csv e copiar para a estrutura*/
 	{
 		//limpa a estrutura
-		limpa_estrutura(ONG);
+		memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
+		memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
+		memset(ONG.Email,      '\0', sizeof(ONG.Email));
+		memset(ONG.Telefone,   '\0', sizeof(ONG.Telefone));
+		memset(ONG.Comunidade, '\0', sizeof(ONG.Comunidade));
+		memset(ONG.Endereco,   '\0', sizeof(ONG.Endereco));
+		memset(ONG.Tipo,       '\0', sizeof(ONG.Tipo));
+		memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
+		ONG.Quant_cesta = 0;
 		
 		//entidade
 		i = 0;
@@ -145,12 +139,20 @@ int main()
 		fwrite(&ONG, sizeof(ONG), 1, dat);
 	}
 	
-	//estrutura para login fácil
-	limpa_estrutura(ONG);
-	printf("\n%s", ONG.Entidade);
-	ONG.Email[0] = 'A'; ONG.Email[1] = 'B'; ONG.Email[2] = 'c';
-	ONG.CNPJ[0] = '1'; ONG.CNPJ[1] = '2'; ONG.CNPJ[2] = '3';
-	fwrite(&ONG, sizeof(ONG), 1, dat);
+	/*limpa a estrutura*/
+	memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
+	memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
+	memset(ONG.Email,      '\0', sizeof(ONG.Email));
+	memset(ONG.Telefone,   '\0', sizeof(ONG.Telefone));
+	memset(ONG.Comunidade, '\0', sizeof(ONG.Comunidade));
+	memset(ONG.Endereco,   '\0', sizeof(ONG.Endereco));
+	memset(ONG.Tipo,       '\0', sizeof(ONG.Tipo));
+	memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
+	ONG.Quant_cesta = 0;
+	
+	ONG.Email[0] = 'A'; ONG.Email[1] = 'B'; ONG.Email[2] = 'c'; /*define email para login facil*/
+	ONG.CNPJ[0] = '1'; ONG.CNPJ[1] = '2'; ONG.CNPJ[2] = '3';    /*define cnpj para login facil*/
+	fwrite(&ONG, sizeof(ONG), 1, dat);                          /*copia dados da estrutura no .dat*/
 	
 	fclose(csv); /*fecha o .csv*/
 	fclose(dat); /*fecha o .dat*/
