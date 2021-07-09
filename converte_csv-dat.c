@@ -1,6 +1,20 @@
 /* BIBLIOTECA */
 #include "biblio_geral.h"
 
+/* FUNÇÕES */
+void limpa_estrutura(secoes ONG)
+{
+	memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
+	memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
+	memset(ONG.Email,      '\0', sizeof(ONG.Email));
+	memset(ONG.Telefone,   '\0', sizeof(ONG.Telefone));
+	memset(ONG.Comunidade, '\0', sizeof(ONG.Comunidade));
+	memset(ONG.Endereco,   '\0', sizeof(ONG.Endereco));
+	memset(ONG.Tipo,       '\0', sizeof(ONG.Tipo));
+	memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
+	ONG.Quant_cesta = 0;
+}
+
 /* CORPO DO PROGRAMA */
 int main()
 {
@@ -130,6 +144,13 @@ int main()
 		//copia os dados da estrutura no .dat
 		fwrite(&ONG, sizeof(ONG), 1, dat);
 	}
+	
+	//estrutura para login fácil
+	limpa_estrutura(ONG);
+	printf("\n%s", ONG.Entidade);
+	ONG.Email[0] = 'A'; ONG.Email[1] = 'B'; ONG.Email[2] = 'c';
+	ONG.CNPJ[0] = '1'; ONG.CNPJ[1] = '2'; ONG.CNPJ[2] = '3';
+	fwrite(&ONG, sizeof(ONG), 1, dat);
 	
 	fclose(csv); /*fecha o .csv*/
 	fclose(dat); /*fecha o .dat*/

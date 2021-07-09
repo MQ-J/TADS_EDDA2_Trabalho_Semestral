@@ -56,20 +56,6 @@ void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 	}
 }
 
-void limpa_estrutura(secoes ESTR)  /*limpa estrutura comum*/
-{
-	memset(ESTR.Entidade,   '\0', sizeof(ESTR.Entidade));
-	memset(ESTR.CNPJ,       '\0', sizeof(ESTR.CNPJ));
-	memset(ESTR.Email,      '\0', sizeof(ESTR.Email));
-	memset(ESTR.Telefone,   '\0', sizeof(ESTR.Telefone));
-	memset(ESTR.Comunidade, '\0', sizeof(ESTR.Comunidade));
-	memset(ESTR.Endereco,   '\0', sizeof(ESTR.Endereco));
-	memset(ESTR.Tipo,       '\0', sizeof(ESTR.Tipo));
-	memset(ESTR.Subpre,     '\0', sizeof(ESTR.Subpre));
-	ESTR.Quant_cesta = 0;
-}
-
-
 void limpa_estrutura_malloc(secoes * ESTR)  /*limpa estrutura com malloc*/
 {
 	memset(ESTR->Entidade,   '\0', sizeof(ESTR->Entidade));
