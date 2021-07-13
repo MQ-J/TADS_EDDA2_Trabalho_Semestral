@@ -150,9 +150,9 @@ int main()
 	memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
 	ONG.Quant_cesta = 0;
 	
-	ONG.Email[0] = 'A'; ONG.Email[1] = 'B'; ONG.Email[2] = 'c'; /*define email para login facil*/
-	ONG.CNPJ[0] = '1'; ONG.CNPJ[1] = '2'; ONG.CNPJ[2] = '3';    /*define cnpj para login facil*/
-	fwrite(&ONG, sizeof(ONG), 1, dat);                          /*copia dados da estrutura no .dat*/
+	ONG.Email[0] = 'A'; ONG.Email[1] = 'B'; ONG.Email[2] = 'c'; ONG.Email[3] = '\0'; /*define email para login facil*/
+	ONG.CNPJ[0] = '1'; ONG.CNPJ[1] = '2'; ONG.CNPJ[2] = '3'; ONG.CNPJ[3] = '\0';     /*define cnpj para login facil*/
+	fwrite(&ONG, sizeof(ONG), 1, dat);                                               /*copia dados da estrutura no .dat*/
 	
 	fclose(csv); /*fecha o .csv*/
 	fclose(dat); /*fecha o .dat*/
