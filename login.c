@@ -4,32 +4,33 @@
 /* FUNCÕES */
 int login(secoes* ONG, int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 {
-	int i; /*percorre estruturas*/
-	int j; /*percorre emails e cnpjs*/
+	int i;          /*para o loop do for*/
+	int libera = 0; /*contador que libera acesso*/
 	
 	for(i=0; i<quant; i++)
 	{	
-		for(j=0; j<email_max+1; j++)
+		if(strcmp(email, ONG[i].Email) == 0) /*vê se emails são iguais*/
 		{
-			printf("%c e %c\n", ONG[i].Email[j], email[j]);
-			if(ONG[i].Email[j] == email[j])
-			{
-				for(j=0; j<cnpj_max+1; j++)
-				{
-					printf("%c e %c\n", ONG[i].CNPJ[j], cnpj[j]);
-					if(ONG[i].CNPJ[j]  != cnpj[j])  return(1);
-				}
-				return(0); /*autoriza acesso*/
-			}
+			libera++;
+			break;
 		}
 	}
+	for(i=0; i<quant; i++)
+	{
+		if (strcmp(cnpj, ONG[i].CNPJ) == 0) /*vê se cnpj's são iguais*/
+		{
+			libera++;
+			break;
+		}
+	}
+	return(libera);
 }
 
 void consulta(secoes* ONG, int quant)
 {
-	int i;
+	int i; /*para o loop do for*/
 	
-	for (i=0; i<quant; i++)
+	for (i=0; i<quant; i++) /*mostra as seções de cada entidade*/
 	{
 		printf("\n\n%s |" , ONG[i].Entidade);
 		printf(" %s |", ONG[i].CNPJ);
@@ -63,14 +64,24 @@ int main()
 	
 	//define numero de estruturas
 	quant = ftell(dat) / sizeof(secoes);   /*debug printf("numero de orgs: %i\n\n", quant);*/
+	
+	//limpa estrutura
+	memset(ONG->Entidade,   '\0', sizeof(ONG->Entidade));
+	memset(ONG->CNPJ,       '\0', sizeof(ONG->CNPJ));
+	memset(ONG->Email,      '\0', sizeof(ONG->Email));
+	memset(ONG->Telefone,   '\0', sizeof(ONG->Telefone));
+	memset(ONG->Comunidade, '\0', sizeof(ONG->Comunidade));
+	memset(ONG->Endereco,   '\0', sizeof(ONG->Endereco));
+	memset(ONG->Tipo,       '\0', sizeof(ONG->Tipo));
+	memset(ONG->Subpre,     '\0', sizeof(ONG->Subpre));
+	ONG->Quant_cesta = 0;
 
 	//preenche estrutura
-	limpa_estrutura_malloc(ONG);            /*limpa estrutura*/
 	fseek(dat, 0, SEEK_SET);                /*para o fread funcionar*/
 	fread(ONG, sizeof(secoes), quant, dat); /*copia valores do .dat pra a estrutura*/
 	fclose(dat);                            /*fecha .dat*/
 	
-	//menu
+	//menu de login
 	do
 	{
 		system("cls");
@@ -79,7 +90,7 @@ int main()
 		printf("digite seu email: ");                fflush(stdin);  gets(email);
 		printf("Digite o cnpj [somente números]: "); fflush(stdin);  gets(cnpj);	
 	}
-	while(login(ONG, quant, email, cnpj) != 0);
+	while(login(ONG, quant, email, cnpj) != 2);
 
 	consulta(ONG, quant); /*chama a consulta*/
 	
