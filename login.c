@@ -26,6 +26,7 @@ int login(secoes* ONG, int quant, char email[email_max  + 1], char cnpj [cnpj_ma
 	return(libera);
 }
 
+
 void consulta(secoes* ONG, int quant)
 {
 	int i; /*para o loop do for*/
@@ -42,6 +43,8 @@ void consulta(secoes* ONG, int quant)
 		printf(" %s |", ONG[i].Subpre);
 		printf(" %i |", ONG[i].Quant_cesta);
 	}
+	printf("\n\nDigite qualquer tecla para voltar");
+	getche();
 }
 
 
@@ -56,6 +59,7 @@ int main()
 	int quant;                  /*quantidade de organizações no .dat*/
 	char email[email_max  + 1]; /*para login no sistema*/
 	char cnpj [cnpj_max   + 1]; /*para login no sistema*/
+	int op, loop;               /*controla opção do sistema*/
 	
 	//malloc da estrutura
 	FILE * dat = fopen("OSC.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
@@ -81,18 +85,46 @@ int main()
 	fread(ONG, sizeof(secoes), quant, dat); /*copia valores do .dat pra a estrutura*/
 	fclose(dat);                            /*fecha .dat*/
 	
+	//ordena estrutura
+	ordena_enti(ONG, 0, quant-1);
+	
 	//menu de login
 	do
 	{
 		system("cls");
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
-		printf("digite seu email: ");                fflush(stdin);  gets(email);
+		printf("Digite seu email: ");                fflush(stdin);  gets(email);
 		printf("Digite o cnpj [somente números]: "); fflush(stdin);  gets(cnpj);	
 	}
 	while(login(ONG, quant, email, cnpj) != 2);
-
-	consulta(ONG, quant); /*chama a consulta*/
+	
+	//menu de opções
+	do
+	{
+		system("cls");
+		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
+		printf("----------------------------\n");
+		printf("1 - Consulta de entidades\n");
+		printf("2 - Cadastro de entidades\n");
+		printf("3 - Cadastro de assistidos\n");
+		printf("4 - Cadastro de donativos\n");
+		printf("5 - Atendimento\n");
+		printf("0 - sair\n");
+		printf("----------------------------\n");
+		printf("Digite a opção escolhida: ");
+		fflush(stdin); scanf("%i", &op);
+		switch(op)
+		{
+			case 1: consulta(ONG, quant); break;
+			case 2: break;
+			case 3: break;
+			case 4: break;
+			case 5: break;
+			case 0: loop = 1; break;
+		}
+	}
+	while(loop != 1);
 	
 	free(ONG); /*libera o espaço alocado*/
 	
