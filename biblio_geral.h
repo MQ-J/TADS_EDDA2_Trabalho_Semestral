@@ -96,3 +96,4 @@ void ordena_enti(secoes * ONG, int ini, int fim)  /*ordena .dat de entidades com
 		ordena_enti(ONG, i+1, fim);
 	}
 }
+
