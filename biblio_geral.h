@@ -55,3 +55,44 @@ void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 		exit(0);
 	}
 }
+
+void ordena_enti(secoes * ONG, int ini, int fim)  /*ordena .dat de entidades com quick_sort*/
+{
+	//variáveis locais
+	int pivo, i, j;
+	secoes aux;
+	
+	//caso o vetor só tenha um numero a função não roda
+	if(ini < fim)
+	{
+		//definição das variáveis
+		pivo = fim;
+		i    = ini;
+		j    = fim;
+		
+		while(i<j)
+		{
+			//analisa os numeros do vetor, guardando o que tem que trocar
+			while((strcmp(ONG[i].CNPJ, ONG[pivo].CNPJ) <= 0) && i < fim)
+			i++;
+			while(strcmp(ONG[j].CNPJ, ONG[pivo].CNPJ) > 0)
+			j--;
+			
+			//troca o que tem q trocar
+			if(i<j)
+			{
+				aux    = ONG[i];
+				ONG[i] = ONG[j];
+				ONG[j] =  aux  ;
+			}
+		}
+		//quando acaba as trocas, muda o pivo
+		aux       = ONG[pivo];
+		ONG[pivo] =   ONG[i] ;
+		ONG[i]    =    aux   ;
+		
+		//refaz a função nos dois lados do vetor
+		ordena_enti(ONG, ini, i-1);
+		ordena_enti(ONG, i+1, fim);
+	}
+}
