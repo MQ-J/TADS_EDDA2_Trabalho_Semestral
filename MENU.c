@@ -4,25 +4,34 @@
 /* FUNCÕES */
 int login(secoes* ONG, int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 {
-	int i;          /*para o loop do for*/
-	int libera = 0; /*contador que libera acesso*/
+	int metade = quant/2; /*para ler o meio da estrutura*/
+	int libera;           /*variável que controla o acesso*/
 	
-	for(i=0; i<quant; i++)
-	{	
-		if(strcmp(email, ONG[i].Email) == 0) /*vê se emails são iguais*/
-		{
-			libera++;
-			break;
-		}
-	}
-	for(i=0; i<quant; i++)
+	printf("vendo %s e %s\n", cnpj, ONG[metade].CNPJ); /*debug*/
+	
+	if (strcmp(cnpj, ONG[metade].CNPJ) == 0) /*caso o cnpj esteja no meio*/
 	{
-		if (strcmp(cnpj, ONG[i].CNPJ) == 0) /*vê se cnpj's são iguais*/
+		if (strcmp(email, ONG[metade].Email) == 0)
 		{
-			libera++;
-			break;
+			printf("Achei!"); getch(); /*debug*/
+			libera = 1;                /*libera acesso*/
+		}
+		else
+		{
+		printf("Senha errada!"); getch(); /*debug*/
+		libera = 0;                /*não libera acesso*/
 		}
 	}
+
+	if (strcmp(cnpj, ONG[metade].CNPJ) < 0) /*caso cnpj seja menor*/
+	{
+		libera = login(ONG, metade-1, email, cnpj);
+	}
+	if (strcmp(cnpj, ONG[metade].CNPJ) > 0) /*caso cnpj seja maior*/
+	{
+		libera = login(ONG, quant+3, email, cnpj);
+	}
+	
 	return(libera);
 }
 
@@ -95,9 +104,9 @@ int main()
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
 		printf("Digite seu email: ");                fflush(stdin);  gets(email);
-		printf("Digite o cnpj [somente números]: "); fflush(stdin);  gets(cnpj);	
+		printf("Digite o cnpj [somente números]: "); fflush(stdin);  gets(cnpj);
 	}
-	while(login(ONG, quant, email, cnpj) != 2);
+	while(login(ONG, quant, email, cnpj) != 1);
 	
 	//menu de opções
 	do
