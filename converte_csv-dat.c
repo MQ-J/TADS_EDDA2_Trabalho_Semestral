@@ -12,8 +12,8 @@ int main()
 	char item;     /*pega os caracteres do .csv para a estrutura*/
 	char quant[5]; /*máximo de 1000 cestas*/
 	
-	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv); /*abre para ler*/
-	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat); /*abre como binário*/
+	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv); /*abre .csv para ler*/
+	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat); /*cria .dat novo*/
 	fseek(csv, 112, SEEK_SET);                            /*pula o cabeçalho do .csv*/
 	
 	while(!feof(csv)) /*looping para ler o .csv e copiar para a estrutura*/
