@@ -5,31 +5,61 @@
 #include <string.h> /*para usar fgets e afins*/
 #include <conio.h>  /*para usar gets e afins*/
 
+
 /* DEFINIÇÕES */
+//Organizações Entidade Civíl
 #define enti_max   116 /*o maior tem 116 caracteres*/
-#define cnpj_max   14  /*CNPJ tem 14 numeros*/
+#define cnpj_max    14 /*CNPJ tem 14 numeros*/
 #define email_max  100 /*o maior tem 42*/
-#define telefo_max 11  /*11 caracteres*/
-#define comuni_max 25  /*o maior tem 25*/
-#define endere_max 93  /*o maior tem 93*/
-#define tipo_max   17  /*o maior tinha 17*/
-#define subpre_max 18  /*o maior tinha 18*/
-#define cesta_max  4   /*como já tem numeros de 4 casas no .csv*/
+#define telefo_max  11 /*11 caracteres*/
+#define comuni_max  25 /*o maior tem 25*/
+#define endere_max  93 /*o maior tem 93*/
+#define tipo_max    17 /*o maior tinha 17*/
+#define subpre_max  18 /*o maior tinha 18*/
+#define cesta_max    4 /*como já tem numeros de 4 casas no .csv*/
+
+//Assistidos
+#define nome_max    55 /*o maior tem 55*/
+#define data_max    10 /*padrão DD/MM/AAAA*/
+#define cpf_max     11 /*CPF tem 11 numeros*/
+#define muni_max     9 /*o maior tem 9*/
+#define logra_max   50 /*o maior tem 34*/
+#define nume_max     4 /*o maior tem 4*/
+#define comple_max  10 /*o maior tem 7*/
+#define bairro_max  20 /*o maior tem 20*/
+#define telecel_max 11 /*00 000000000 - sem espaço*/
+
 
 /* ESTRUTURAS */
-typedef struct
+typedef struct //Organizações Entidade Civíl
 {
-	char Entidade  [enti_max   + 1];
-	char CNPJ      [cnpj_max   + 1];
-	char Email     [email_max  + 1];
-	char Telefone  [telefo_max + 1];
-	char Comunidade[comuni_max + 1];
-	char Endereco  [endere_max + 1];
-	char Tipo      [tipo_max   + 1];
-	char Subpre    [subpre_max + 1];
+	char Entidade   [enti_max   + 1];
+	char CNPJ       [cnpj_max   + 1];
+	char Email      [email_max  + 1];
+	char Telefone   [telefo_max + 1];
+	char Comunidade [comuni_max + 1];
+	char Endereco   [endere_max + 1];
+	char Tipo       [tipo_max   + 1];
+	char Subpre     [subpre_max + 1];
 	int Quant_cesta;	
 	
 } secoes;
+
+typedef struct //Assistidos
+{
+	char NomeCompleto [nome_max    + 1];
+	char DataNasc     [data_max    + 1];
+	char CPF          [cpf_max     + 1];
+	char Municipio    [muni_max    + 1];
+	char Logradouro   [logra_max   + 1];
+	char Numero       [nume_max    + 1];
+	char Complemento  [comple_max  + 1];
+	char Bairro       [bairro_max  + 1];
+	char TelefoneCel  [telecel_max + 1];
+	char PossuiPet;
+	
+} secoesAssis;
+
 
 /* FUNÇÕES */
 void decoracao()  /*muda a cor da tela e habilita acentos*/
