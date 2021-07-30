@@ -19,7 +19,7 @@ int main()
 	//variáveis locais
 	char email[email_max  + 1]; /*para login no sistema*/
 	char cnpj [cnpj_max   + 1]; /*para login no sistema*/
-	int op, loop;               /*controla opção do sistema*/
+	char op; int loop;          /*controlam opções do sistema*/
 	
 	//faz malloc e organiza entidades
 	organiza_entidade();
@@ -43,25 +43,40 @@ int main()
 		printf("----------------------------\n");
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
-		printf("1 - Consulta de entidades\n");
-		printf("2 - Cadastro de entidades\n");
-		printf("3 - Cadastro de assistidos\n");
-		printf("4 - Cadastro de donativos\n");
-		printf("5 - Atendimento\n");
-		printf("0 - sair\n");
-		printf("9 - reinicia cadastro de estruturas\n"); /*função momentãnea para testes*/
+		printf("ENTIDADES\n");
+		printf(" 1 - Consulta\n 2 - Cadastro\n 3 - Reseta\n");
+		printf("ASSISTIDOS\n");
+		printf(" 4 - Consulta\n 5 - Cadastro\n 6 - Reseta\n");
+		printf("DONATIVOS\n");
+		printf(" 7 - Consulta\n 8 - Cadastro\n 9 - Reseta\n");
+		printf("\n");
+		printf(" 0 - ATENDIMENTO\n");
+		printf(" z - ENCERRAR\n");
 		printf("----------------------------\n");
 		printf("Digite a opção escolhida: ");
-		fflush(stdin); scanf("%i", &op);
+		fflush(stdin); scanf("%c", &op);
 		switch(op)
 		{
-			case 1: consulta(ONG, quant); break;
-			case 2: system("cadastra_entidade.exe"); break;
-			case 3: system("cadastra_assistido.exe"); break;
-			case 4: break;
-			case 5: break;
-			case 9: system("converte_csvEntidade.exe"); break;
-			case 0: loop = 1; break;
+			//entidades
+			case '1': consulta(ONG, quant); break;
+			case '2': system("cadastra_entidade.exe"); break;
+			case '3': system("converte_csvEntidade.exe"); break;
+			
+			//assistidos
+			case '4': break;
+			case '5': system("cadastra_assistido.exe"); break;
+			case '6': system("converte_csvAssistido.exe"); break;
+			
+			//donativos
+			case '7': break;
+			case '8': break;
+			case '9': break;
+			
+			//atendimento
+			case '0': break;
+			
+			//sistema
+			case 'z': case 'Z': loop = 1; break;
 		}
 	}
 	while(loop != 1);
