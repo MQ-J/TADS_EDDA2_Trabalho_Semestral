@@ -57,7 +57,7 @@ int main()
 		{
 			case 1: consulta(ONG, quant); break;
 			case 2: system("cadastra_entidade.exe"); break;
-			case 3: break;
+			case 3: system("cadastra_assistido.exe"); break;
 			case 4: break;
 			case 5: break;
 			case 9: system("converte_csvEntidade.exe"); break;
