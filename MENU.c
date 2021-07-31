@@ -43,8 +43,7 @@ int main()
 		printf("----------------------------\n");
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
-		printf("ENTIDADES\n");
-		printf(" 1 - Consulta\n 2 - Cadastro\n 3 - Reseta\n");
+		printf("1 - ENTIDADES\n");
 		printf("ASSISTIDOS\n");
 		printf(" 4 - Consulta\n 5 - Cadastro\n 6 - Reseta\n");
 		printf("DONATIVOS\n");
@@ -58,7 +57,7 @@ int main()
 		switch(op)
 		{
 			//entidades
-			case '1': consulta(ONG, quant); break;
+			case '1': system("ENTIDADES.exe"); break;
 			case '2': system("cadastra_entidade.exe"); break;
 			case '3': system("converte_csvEntidade.exe"); break;
 			
