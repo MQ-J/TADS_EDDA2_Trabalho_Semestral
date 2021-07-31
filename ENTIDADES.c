@@ -2,10 +2,10 @@
 #include "biblio_geral.h"
 
 /* FUNÇÕES */
-void consulta_entidade(void);
-void limpa_entidade(void);
-void preenche_entidade(void);
-void confirma_entidade(void);
+void consulta_entidade(void); //operação de consulta
+void limpa_entidade   (void); //previnir lixo de memória
+void preenche_entidade(void); //operação de cadastro
+void confirma_entidade(void); //operação de cadastro
 
 /* VARIÁVEL DAS ESTRUTURAS */
 secoes ONG;
@@ -31,12 +31,11 @@ int main()
 		printf("3 - Reseta lista de entidades\n");
 		printf("0 - Voltar ao menu\n");
 		fflush(stdin); scanf("%c", &op);
-		
 		switch(op)
 		{
 			case '1': consulta_entidade(); break;
 			case '2': limpa_entidade(); preenche_entidade(); confirma_entidade(); break;
-			case '3': system("converte_csvEntidade.exe"); break;
+			case '3': system("converte_csvEntidade.exe"); getch(); break;
 			case '0': return(0);
 		}
 	}
@@ -48,7 +47,6 @@ void consulta_entidade()
 	//variáveis
 	secoes * ONG_consulta;
 	int quant;
-	
 	char CNPJ [cnpj_max   + 1];
 	int i;
 	
@@ -82,15 +80,25 @@ void consulta_entidade()
 	//pesquisa cnpj
 	printf("Qual cnpj vc quer procurar?\n");
 	fflush(stdin); gets(CNPJ);
-	for(i=0; i<=quant; i++)
+	if (strcmp(CNPJ, "todos") == 0)
 	{
-		if (strcmp(CNPJ, ONG_consulta[i].CNPJ) == 0)
+		for(i=0; i<=quant; i++)
 		{
-			printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
-			break;
+			printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |\n\n", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
 		}
-		if (strcmp(CNPJ, ONG_consulta[i].CNPJ) != 0 && i == quant)
-		printf("Cnpj não encontrado!");
+	}
+	else
+	{
+		for(i=0; i<=quant; i++)
+		{
+			if (strcmp(CNPJ, ONG_consulta[i].CNPJ) == 0)
+			{
+				printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
+				break;
+			}
+			if (strcmp(CNPJ, ONG_consulta[i].CNPJ) != 0 && i == quant)
+			printf("Cnpj não encontrado!");
+		}
 	}
 	
 	//pausa na tela
