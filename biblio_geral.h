@@ -77,6 +77,15 @@ void erro_malloc(secoes * doc)  /*verifica se malloc deu certo*/
 	}
 }
 
+void erro_malloc_assis(secoesAssis * doc)  /*verifica se malloc deu certo*/
+{
+	if (doc == NULL)
+	{
+		printf("Erro na alocação da estrutura");
+		exit(0);
+	}
+}
+
 void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 {
 	if (doc == NULL)
