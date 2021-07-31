@@ -8,7 +8,6 @@ int quant;    /*quantidade de organizações no .dat*/
 /* FUNCÕES */
 void organiza_entidade(void);
 int login(int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1]);
-void consulta(secoes* ONG, int quant);
 
 /* CORPO DO PROGRAMA */
 int main()
@@ -38,16 +37,13 @@ int main()
 	//menu de opções
 	do
 	{
-		organiza_entidade();
 		system("cls");
 		printf("----------------------------\n");
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
 		printf("1 - ENTIDADES\n");
-		printf("ASSISTIDOS\n");
-		printf(" 4 - Consulta\n 5 - Cadastro\n 6 - Reseta\n");
-		printf("DONATIVOS\n");
-		printf(" 7 - Consulta\n 8 - Cadastro\n 9 - Reseta\n");
+		printf("2 - ASSISTIDOS\n");
+		printf("3 - DONATIVOS\n");
 		printf("\n");
 		printf(" 0 - ATENDIMENTO\n");
 		printf(" z - ENCERRAR\n");
@@ -56,25 +52,10 @@ int main()
 		fflush(stdin); scanf("%c", &op);
 		switch(op)
 		{
-			//entidades
 			case '1': system("ENTIDADES.exe"); break;
-			case '2': system("cadastra_entidade.exe"); break;
-			case '3': system("converte_csvEntidade.exe"); break;
-			
-			//assistidos
-			case '4': break;
-			case '5': system("cadastra_assistido.exe"); break;
-			case '6': system("converte_csvAssistido.exe"); break;
-			
-			//donativos
-			case '7': break;
-			case '8': break;
-			case '9': break;
-			
-			//atendimento
+			case '2': system("ASSISTIDOS.exe"); break;
+			case '3': break;
 			case '0': break;
-			
-			//sistema
 			case 'z': case 'Z': loop = 1; break;
 		}
 	}
@@ -147,24 +128,4 @@ int login(int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 	}
 	
 	return(libera);
-}
-
-void consulta(secoes* ONG, int quant)
-{
-	int i; /*para o loop do for*/
-	
-	for (i=0; i<quant; i++) /*mostra as seções de cada entidade*/
-	{
-		printf("\n\n%s |" , ONG[i].Entidade);
-		printf(" %s |", ONG[i].CNPJ);
-		printf(" %s |", ONG[i].Email);
-		printf(" %s |", ONG[i].Telefone);
-		printf(" %s |", ONG[i].Comunidade);
-		printf(" %s |", ONG[i].Endereco);
-		printf(" %s |", ONG[i].Tipo);
-		printf(" %s |", ONG[i].Subpre);
-		printf(" %i |", ONG[i].Quant_cesta);
-	}
-	printf("\n\nDigite qualquer tecla para voltar");
-	getche();
 }
