@@ -82,21 +82,21 @@ void consulta_entidade()
 	fflush(stdin); gets(CNPJ);
 	if (strcmp(CNPJ, "todos") == 0)
 	{
-		for(i=0; i<=quant; i++)
+		for(i=0; i<quant; i++)
 		{
 			printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |\n\n", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
 		}
 	}
 	else
 	{
-		for(i=0; i<=quant; i++)
+		for(i=0; i<quant; i++)
 		{
 			if (strcmp(CNPJ, ONG_consulta[i].CNPJ) == 0)
 			{
 				printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
 				break;
 			}
-			if (strcmp(CNPJ, ONG_consulta[i].CNPJ) != 0 && i == quant)
+			if (strcmp(CNPJ, ONG_consulta[i].CNPJ) != 0 && i == quant-1)
 			printf("Cnpj não encontrado!");
 		}
 	}
