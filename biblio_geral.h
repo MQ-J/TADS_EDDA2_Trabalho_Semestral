@@ -43,7 +43,7 @@ typedef struct //Organizações Entidade Civíl
 	char Subpre     [subpre_max + 1];
 	int Quant_cesta;	
 	
-} secoes;
+} secoesEnti;
 
 typedef struct //Assistidos
 {
@@ -68,7 +68,7 @@ void decoracao()  /*muda a cor da tela e habilita acentos*/
 	setlocale(LC_ALL, "");	
 }
 
-void erro_malloc(secoes * doc)  /*verifica se malloc deu certo*/
+void erro_malloc(secoesEnti * doc)  /*verifica se malloc deu certo*/
 {
 	if (doc == NULL)
 	{
@@ -95,11 +95,11 @@ void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 	}
 }
 
-void ordena_enti(secoes * ONG, int ini, int fim)  /*ordena .dat de entidades com quick_sort*/
+void ordena_enti(secoesEnti * ONG, int ini, int fim)  /*ordena .dat de entidades com quick_sort*/
 {
 	//variáveis locais
 	int pivo, i, j;
-	secoes aux;
+	secoesEnti aux;
 	
 	//caso o vetor só tenha um numero a função não roda
 	if(ini < fim)

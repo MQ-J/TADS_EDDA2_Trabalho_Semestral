@@ -2,7 +2,7 @@
 #include "biblio_geral.h"
 
 /* VARIÁVEIS GLOBAIS */
-secoes * ONG; /*ponteiro de estruturas*/
+secoesEnti * ONG; /*ponteiro de estruturas*/
 int quant;    /*quantidade de organizações no .dat*/
 
 /* FUNCÕES */
@@ -69,10 +69,10 @@ void organiza_entidade()
 	//malloc da estrutura
 	FILE * dat = fopen("OSC.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
 	fseek(dat, 0, SEEK_END);                              /*para o ftell funcionar*/
-	ONG = (secoes*) malloc(ftell(dat)); erro_malloc(ONG); /*malloc da estrutura*/
+	ONG = (secoesEnti*) malloc(ftell(dat)); erro_malloc(ONG); /*malloc da estrutura*/
 	
 	//define numero de estruturas
-	quant = ftell(dat) / sizeof(secoes);   //printf("numero de orgs: %i\n\n", quant); getch();
+	quant = ftell(dat) / sizeof(secoesEnti);   //printf("numero de orgs: %i\n\n", quant); getch();
 	
 	//limpa estrutura
 	memset(ONG->Entidade,   '\0', sizeof(ONG->Entidade));
@@ -87,7 +87,7 @@ void organiza_entidade()
 
 	//preenche estrutura
 	fseek(dat, 0, SEEK_SET);                /*para o fread funcionar*/
-	fread(ONG, sizeof(secoes), quant, dat); /*copia valores do .dat pra a estrutura*/
+	fread(ONG, sizeof(secoesEnti), quant, dat); /*copia valores do .dat pra a estrutura*/
 	fclose(dat);                            /*fecha .dat*/
 	
 	//ordena estrutura

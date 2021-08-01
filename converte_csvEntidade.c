@@ -7,7 +7,7 @@ int main()
 {
 	decoracao();  /*habilita acento e cor do programa*/
 	
-	secoes ONG;    /*variável das estruturas*/
+	secoesEnti ONG;    /*variável das estruturas*/
 	int i;         /*contador para as estruturas*/
 	char item;     /*pega os caracteres do .csv para a estrutura*/
 	char quant[5]; /*máximo de 1000 cestas*/

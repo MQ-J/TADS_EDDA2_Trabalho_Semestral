@@ -8,7 +8,7 @@ void preenche_entidade(void); //operação de cadastro
 void confirma_entidade(void); //operação de cadastro
 
 /* VARIÁVEL DAS ESTRUTURAS */
-secoes ONG;
+secoesEnti ONG;
 
 /* CORPO DO PROGRAMA */
 int main()
@@ -45,7 +45,7 @@ int main()
 void consulta_entidade()
 {	
 	//variáveis
-	secoes * ONG_consulta;
+	secoesEnti * ONG_consulta;
 	int quant;
 	char CNPJ [cnpj_max   + 1];
 	int i;
@@ -53,10 +53,10 @@ void consulta_entidade()
 	//malloc da estrutura
 	FILE * dat = fopen("OSC.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
 	fseek(dat, 0, SEEK_END);                              /*para o ftell funcionar*/
-	ONG_consulta = (secoes*) malloc(ftell(dat)); erro_malloc(ONG_consulta); /*malloc da estrutura*/
+	ONG_consulta = (secoesEnti*) malloc(ftell(dat)); erro_malloc(ONG_consulta); /*malloc da estrutura*/
 	
 	//define numero de estruturas
-	quant = ftell(dat) / sizeof(secoes);   //printf("numero de orgs: %i\n\n", quant); getch();
+	quant = ftell(dat) / sizeof(secoesEnti);   //printf("numero de orgs: %i\n\n", quant); getch();
 	
 	//limpa estrutura
 	memset(ONG_consulta->Entidade,   '\0', sizeof(ONG_consulta->Entidade));
@@ -71,7 +71,7 @@ void consulta_entidade()
 
 	//preenche estrutura
 	fseek(dat, 0, SEEK_SET);                /*para o fread funcionar*/
-	fread(ONG_consulta, sizeof(secoes), quant, dat); /*copia valores do .dat pra a estrutura*/
+	fread(ONG_consulta, sizeof(secoesEnti), quant, dat); /*copia valores do .dat pra a estrutura*/
 	fclose(dat);                            /*fecha .dat*/
 	
 	//ordena estrutura
