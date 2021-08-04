@@ -99,33 +99,40 @@ void organiza_entidade()
 
 int login(int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 {
-	int metade = quant/2; /*para ler o meio da estrutura*/
-	int libera;           /*variável que controla o acesso*/
+	int ini = 0, fim = quant, metade;
 	
-	printf("vendo %s e %s\n", cnpj, ONG[metade].CNPJ); /*debug*/
-	
-	if (strcmp(cnpj, ONG[metade].CNPJ) == 0) /*caso o cnpj esteja no meio*/
-	{
-		if (strcmp(email, ONG[metade].Email) == 0)
+	while(ini<=fim)
+	{	
+		metade = (ini+fim)/2; /*para ler o meio da estrutura*/
+		printf("vendo %s e %s\n", cnpj, ONG[metade].CNPJ); /*debug*/ getch();
+		
+		if (strcmp(cnpj, ONG[metade].CNPJ) == 0) /*caso o cnpj esteja no meio*/
 		{
-			printf("Achei!"); getch(); /*debug*/
-			libera = 1;                /*libera acesso*/
+			if (strcmp(email, ONG[metade].Email) == 0)
+			{
+				printf("Achei!"); getch(); /*debug*/
+				return 1;                /*libera acesso*/
+			}
+			else
+			{
+				printf("Login incorreto"); getch(); /*debug*/
+				return 0;                /*não libera acesso*/
+			}
 		}
-		else
+		
+		if (strcmp(cnpj, ONG[metade].CNPJ) < 0) /*caso cnpj seja menor*/
 		{
-		printf("Senha errada!"); getch(); /*debug*/
-		libera = 0;                /*não libera acesso*/
+			fim = metade-1;
+		}
+		
+		if (strcmp(cnpj, ONG[metade].CNPJ) > 0) /*caso cnpj seja maior*/
+		{
+			if(metade == 1) return 0; /*não libera acesso*/
+			fim = metade+1;
 		}
 	}
-
-	if (strcmp(cnpj, ONG[metade].CNPJ) < 0) /*caso cnpj seja menor*/
+	if (ini>fim)
 	{
-		libera = login(metade-1, email, cnpj);
+		return 0; /*não libera acesso*/
 	}
-	if (strcmp(cnpj, ONG[metade].CNPJ) > 0) /*caso cnpj seja maior*/
-	{
-		libera = login(quant+3, email, cnpj);
-	}
-	
-	return(libera);
 }
