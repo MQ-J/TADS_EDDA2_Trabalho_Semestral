@@ -54,7 +54,7 @@ int main()
 		{
 			case '1': system("ENTIDADES.exe"); break;
 			case '2': system("ASSISTIDOS.exe"); break;
-			case '3': break;
+			case '3': system("DONATIVOS.exe"); break;
 			case '9': break;
 			case '0': loop = 1; break;
 		}
