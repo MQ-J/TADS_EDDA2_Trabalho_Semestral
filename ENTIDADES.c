@@ -5,10 +5,12 @@
 void consulta_entidade(void); //operação de consulta
 void limpa_entidade   (void); //previnir lixo de memória
 void preenche_entidade(void); //operação de cadastro
+void valida_tipo      (char*); //operação de cadastro
 void confirma_entidade(void); //operação de cadastro
 
-/* VARIÁVEL DAS ESTRUTURAS */
-secoesEnti ONG;
+/* VARIÁVEIS GLOBAIS */
+secoesEnti ONG; //variável das estruturas
+int erro = 0;       //valida dados digitados
 
 /* CORPO DO PROGRAMA */
 int main()
@@ -132,9 +134,23 @@ void preenche_entidade(void)
 	printf("Digite o telefone da Entidade: ");       for(i=0; i<telefo_max; i++) ONG.Telefone[i] = getche(); ONG.Telefone[i] = '\0';
 	printf("\nDigite a comunidade da Entidade: ");   fflush(stdin); gets(ONG.Comunidade);
 	printf("Digite o endereço da Entidade: ");       fflush(stdin); gets(ONG.Endereco);
-	printf("Digite o tipo da Entidade: ");           fflush(stdin); gets(ONG.Tipo);
+	printf("Digite o tipo da Entidade: ");           fflush(stdin); valida_tipo(gets(ONG.Tipo));
 	printf("Digite a sub-prefeitura da Entidade: "); fflush(stdin); gets(ONG.Subpre);
 	printf("----------------------------\n");
+	if(erro == 1){ printf("tipo inválido\n\n"); getch(); preenche_entidade();}
+	
+}
+
+void valida_tipo(char * tipo)
+{
+	if(
+	strcmp(tipo, "Favela")                     && strcmp(tipo, "Idosos")                        && strcmp(tipo, "Cortiço") &&
+	strcmp(tipo, "LGBTI")                      && strcmp(tipo, "Ocupação")                      && strcmp(tipo, "Outros")  &&
+	strcmp(tipo, "Loteamento")                 && strcmp(tipo, "Comunidade indígena")           &&
+	strcmp(tipo, "Grupo de mulheres")          && strcmp(tipo, "Imigrantes/refugiados")         &&
+	strcmp(tipo, "Criança e adolescente")      && strcmp(tipo, "Minorias étnico-raciais")       &&
+	strcmp(tipo, "Pessoas em situação de rua") && strcmp(tipo, "Egressos do sistema prisional") &&
+	strcmp(tipo, "Pessoas com deficiência")!= 0) erro = 1;
 }
 
 void confirma_entidade(void)
