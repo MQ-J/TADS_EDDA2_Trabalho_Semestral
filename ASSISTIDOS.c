@@ -76,7 +76,7 @@ void consulta_assistido()
 	fclose(dat);                            /*fecha .dat*/
 	
 	//ordena estrutura
-	
+	ordena_assis(Pessoa_consulta, 0, quant-1);
 	
 	//pesquisa cpf
 	printf("Qual cpf vc quer procurar?\n");

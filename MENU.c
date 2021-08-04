@@ -41,12 +41,12 @@ int main()
 		printf("----------------------------\n");
 		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
 		printf("----------------------------\n");
-		printf("1 - ENTIDADES\n");
-		printf("2 - ASSISTIDOS\n");
-		printf("3 - DONATIVOS\n");
+		printf(" 1 - ENTIDADES\n");
+		printf(" 2 - ASSISTIDOS\n");
+		printf(" 3 - DONATIVOS\n");
 		printf("\n");
-		printf(" 0 - ATENDIMENTO\n");
-		printf(" z - ENCERRAR\n");
+		printf(" 9 - ATENDIMENTO\n");
+		printf(" 0 - ENCERRAR\n");
 		printf("----------------------------\n");
 		printf("Digite a opção escolhida: ");
 		fflush(stdin); scanf("%c", &op);
@@ -55,8 +55,8 @@ int main()
 			case '1': system("ENTIDADES.exe"); break;
 			case '2': system("ASSISTIDOS.exe"); break;
 			case '3': break;
-			case '0': break;
-			case 'z': case 'Z': loop = 1; break;
+			case '9': break;
+			case '0': loop = 1; break;
 		}
 	}
 	while(loop != 1);
@@ -69,7 +69,7 @@ void organiza_entidade()
 	//malloc da estrutura
 	FILE * dat = fopen("OSC.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
 	fseek(dat, 0, SEEK_END);                              /*para o ftell funcionar*/
-	ONG = (secoesEnti*) malloc(ftell(dat)); erro_malloc(ONG); /*malloc da estrutura*/
+	ONG = (secoesEnti*) malloc(ftell(dat)); erro_malloc_enti(ONG); /*malloc da estrutura*/
 	
 	//define numero de estruturas
 	quant = ftell(dat) / sizeof(secoesEnti);   //printf("numero de orgs: %i\n\n", quant); getch();

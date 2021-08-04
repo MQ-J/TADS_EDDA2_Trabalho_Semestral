@@ -53,7 +53,7 @@ void consulta_entidade()
 	//malloc da estrutura
 	FILE * dat = fopen("OSC.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
 	fseek(dat, 0, SEEK_END);                              /*para o ftell funcionar*/
-	ONG_consulta = (secoesEnti*) malloc(ftell(dat)); erro_malloc(ONG_consulta); /*malloc da estrutura*/
+	ONG_consulta = (secoesEnti*) malloc(ftell(dat)); erro_malloc_enti(ONG_consulta); /*malloc da estrutura*/
 	
 	//define numero de estruturas
 	quant = ftell(dat) / sizeof(secoesEnti);   //printf("numero de orgs: %i\n\n", quant); getch();

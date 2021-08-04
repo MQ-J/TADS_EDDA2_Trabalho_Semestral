@@ -68,20 +68,24 @@ void decoracao()  /*muda a cor da tela e habilita acentos*/
 	setlocale(LC_ALL, "");	
 }
 
-void erro_malloc(secoesEnti * doc)  /*verifica se malloc deu certo*/
+void erro_malloc_enti(secoesEnti * doc)  /*verifica se malloc de entidades deu certo*/
 {
 	if (doc == NULL)
 	{
-		printf("Erro na alocação da estrutura");
+		system("color 04");
+		printf("malloc devolveu NULL");
+		getch();
 		exit(0);
 	}
 }
 
-void erro_malloc_assis(secoesAssis * doc)  /*verifica se malloc deu certo*/
+void erro_malloc_assis(secoesAssis * doc)  /*verifica se malloc de assistidos deu certo*/
 {
 	if (doc == NULL)
 	{
-		printf("Erro na alocação da estrutura");
+		system("color 04");
+		printf("malloc devolveu NULL");
+		getch();
 		exit(0);
 	}
 }
@@ -90,7 +94,9 @@ void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 {
 	if (doc == NULL)
 	{
-		printf("Erro ao abrir arquivo");
+		system("color 04");
+		printf("Arquivo .dat INEXISTENTE!");
+		getch();
 		exit(0);
 	}
 }
@@ -133,6 +139,47 @@ void ordena_enti(secoesEnti * ONG, int ini, int fim)  /*ordena .dat de entidades
 		//refaz a função nos dois lados do vetor
 		ordena_enti(ONG, ini, i-1);
 		ordena_enti(ONG, i+1, fim);
+	}
+}
+
+void ordena_assis(secoesAssis * Pessoa, int ini, int fim)  /*ordena .dat de assistidos com quick_sort*/
+{
+	//variáveis locais
+	int pivo, i, j;
+	secoesAssis aux;
+	
+	//caso o vetor só tenha um numero a função não roda
+	if(ini < fim)
+	{
+		//definição das variáveis
+		pivo = fim;
+		i    = ini;
+		j    = fim;
+		
+		while(i<j)
+		{
+			//analisa os numeros do vetor, guardando o que tem que trocar
+			while((strcmp(Pessoa[i].CPF, Pessoa[pivo].CPF) <= 0) && i < fim)
+			i++;
+			while(strcmp(Pessoa[j].CPF, Pessoa[pivo].CPF) > 0)
+			j--;
+			
+			//troca o que tem q trocar
+			if(i<j)
+			{
+				aux       = Pessoa[i];
+				Pessoa[i] = Pessoa[j];
+				Pessoa[j] =  aux  ;
+			}
+		}
+		//quando acaba as trocas, muda o pivo
+		aux          = Pessoa[pivo];
+		Pessoa[pivo] =   Pessoa[i] ;
+		Pessoa[i]    =    aux   ;
+		
+		//refaz a função nos dois lados do vetor
+		ordena_assis(Pessoa, ini, i-1);
+		ordena_assis(Pessoa, i+1, fim);
 	}
 }
 
