@@ -6,6 +6,7 @@ void consulta_entidade(void); //operação de consulta
 void limpa_entidade   (void); //previnir lixo de memória
 void preenche_entidade(void); //operação de cadastro
 void valida_tipo      (char*); //operação de cadastro
+void valida_subpre    (char*); //operação de cadastro
 void confirma_entidade(void); //operação de cadastro
 
 /* VARIÁVEIS GLOBAIS */
@@ -135,14 +136,13 @@ void preenche_entidade(void)
 	printf("\nDigite a comunidade da Entidade: ");   fflush(stdin); gets(ONG.Comunidade);
 	printf("Digite o endereço da Entidade: ");       fflush(stdin); gets(ONG.Endereco);
 	printf("Digite o tipo da Entidade: ");           fflush(stdin); valida_tipo(gets(ONG.Tipo));
-	printf("Digite a sub-prefeitura da Entidade: "); fflush(stdin); gets(ONG.Subpre);
+	printf("Digite a sub-prefeitura da Entidade: "); fflush(stdin); valida_subpre(gets(ONG.Subpre));
 	printf("----------------------------\n");
-	if(erro == 1)
+	switch(erro)
 	{
-		printf("tipo inválido\n\n");
-		getch(); preenche_entidade();
+		case 1: printf("tipo inválido\n\n");          getch(); preenche_entidade(); break;
+		case 2: printf("subprefeitura inválida\n\n"); getch(); preenche_entidade(); break;
 	}
-	
 }
 
 void valida_tipo(char * tipo)
@@ -167,6 +167,55 @@ void valida_tipo(char * tipo)
 		case 2058: /*Minorias étnico-raciais*/    case 2885: /*Egressos do sistema prisional*/
 		break;
 		default: erro = 1;
+	}
+}
+
+void valida_subpre(char * subpre)
+{
+	//variáveis
+	int i, soma = 0;
+	
+	//soma os caracteres digitados...
+	for(i=0; i<=subpre_max; i++)
+	soma = soma + subpre[i];
+	
+	//...e verifica se é igual às somas cadastradas
+	switch(soma)
+	{
+		case 1022: /*Aricanduva*/
+		case 564: /*Butantã*/
+		case 1041: /*Campo Limpo*/
+		case 1600: /*Capela do Socorro*/
+		case 910: /*Casa Verde*/
+		case 1188: /*Cidade Ademar*/
+		case 1645: /*Cidade Tiradentes*/
+		/*Ermelino Matarazzo*/
+		/*Freguesia do Ó*/
+		/*Guaianases*/
+		/*Ipiranga*/
+		/*Itaim Paulista*/
+		/*Itaquera*/
+		/*Jabaquara*/
+		/*Jaçanã/Tremembé*/
+		/*Lapa*/
+		case 940: /*M'Boi Mirim*/
+		/*Mooca*/
+		/*Parelheiros*/
+		/*Penha*/
+		/*Perus*/
+		/*Pinheiros*/
+		/*Pirituba/Jaraguá*/
+		/*Santana/Tucuruvi*/
+		/*Santo Amaro*/
+		/*São Mateus*/
+		/*São Miguel*/
+		/*Sapopemba*/
+		/*Sé*/
+		/*Vila Maria/Vila Guilherme*/
+		/*Vila Mariana*/
+		/*Vila Prudente*/
+		break;
+		default: erro = 2;
 	}
 }
 
