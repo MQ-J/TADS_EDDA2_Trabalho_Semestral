@@ -104,35 +104,27 @@ int login(int quant, char email[email_max  + 1], char cnpj [cnpj_max   + 1])
 	while(ini<=fim)
 	{	
 		metade = (ini+fim)/2; /*para ler o meio da estrutura*/
-		printf("vendo %s e %s\n", cnpj, ONG[metade].CNPJ); /*debug*/ getch();
 		
-		if (strcmp(cnpj, ONG[metade].CNPJ) == 0) /*caso o cnpj esteja no meio*/
+		if (strcmp(cnpj, ONG[metade].CNPJ) == 0) /*caso o cnpj esteja no meio...*/
 		{
-			if (strcmp(email, ONG[metade].Email) == 0)
-			{
-				printf("Achei!"); getch(); /*debug*/
-				return 1;                /*libera acesso*/
-			}
+			if (strcmp(email, ONG[metade].Email) == 0)/*...verifica o email dele*/
+				return 1; /*libera acesso*/
 			else
 			{
-				printf("Login incorreto"); getch(); /*debug*/
-				return 0;                /*não libera acesso*/
+				printf("Email incorreto"); getch();
+				return 0; /*não libera acesso*/
 			}
 		}
 		
-		if (strcmp(cnpj, ONG[metade].CNPJ) < 0) /*caso cnpj seja menor*/
-		{
-			fim = metade-1;
-		}
+		if (strcmp(cnpj, ONG[metade].CNPJ) < 0) /*caso cnpj seja menor...*/
+			fim = metade-1; /*...diminui o fim*/
 		
-		if (strcmp(cnpj, ONG[metade].CNPJ) > 0) /*caso cnpj seja maior*/
-		{
-			if(metade == 1) return 0; /*não libera acesso*/
-			fim = metade+1;
-		}
+		if (strcmp(cnpj, ONG[metade].CNPJ) > 0) /*caso cnpj seja maior...*/
+			ini = metade+1; /*...aumenta o inicio*/
 	}
-	if (ini>fim)
+	if (ini>fim)/*vetor acabou*/
 	{
+		printf("CNPJ não cadastrado"); getch();
 		return 0; /*não libera acesso*/
 	}
 }
