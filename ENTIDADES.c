@@ -137,20 +137,37 @@ void preenche_entidade(void)
 	printf("Digite o tipo da Entidade: ");           fflush(stdin); valida_tipo(gets(ONG.Tipo));
 	printf("Digite a sub-prefeitura da Entidade: "); fflush(stdin); gets(ONG.Subpre);
 	printf("----------------------------\n");
-	if(erro == 1){ printf("tipo inválido\n\n"); getch(); preenche_entidade();}
+	if(erro == 1)
+	{
+		printf("tipo inválido\n\n");
+		getch(); preenche_entidade();
+	}
 	
 }
 
 void valida_tipo(char * tipo)
 {
-	if(
-	strcmp(tipo, "Favela")                     && strcmp(tipo, "Idosos")                        && strcmp(tipo, "Cortiço") &&
-	strcmp(tipo, "LGBTI")                      && strcmp(tipo, "Ocupação")                      && strcmp(tipo, "Outros")  &&
-	strcmp(tipo, "Loteamento")                 && strcmp(tipo, "Comunidade indígena")           &&
-	strcmp(tipo, "Grupo de mulheres")          && strcmp(tipo, "Imigrantes/refugiados")         &&
-	strcmp(tipo, "Criança e adolescente")      && strcmp(tipo, "Minorias étnico-raciais")       &&
-	strcmp(tipo, "Pessoas em situação de rua") && strcmp(tipo, "Egressos do sistema prisional") &&
-	strcmp(tipo, "Pessoas com deficiência")!= 0) erro = 1;
+	//variáveis
+	int i, soma = 0;
+	
+	//soma os caracteres digitados...
+	for(i=0; i<=tipo_max; i++)
+	soma = soma + tipo[i];
+	
+	//...e verifica se é igual às somas cadastradas
+	switch(soma)
+	{
+		case 625:  /*Idosos*/
+		case 591:  /*Favela*/	                  case 370:  /*LGBTI*/
+		case 503:  /*Cortiço*/                    case 652:  /*Outros*/
+		case 1048: /*Loteamento*/                 case 436:  /*Ocupação*/
+		case 1659: /*Grupo de mulheres*/          case 1680: /*Comunidade indígena*/
+		case 1793: /*Criança e adolescente*/      case 2020: /*Pessoas com deficiência*/
+		case 2083: /*Pessoas em situação de rua*/ case 2155: /*Imigrantes/refugiados*/
+		case 2058: /*Minorias étnico-raciais*/    case 2885: /*Egressos do sistema prisional*/
+		break;
+		default: erro = 1;
+	}
 }
 
 void confirma_entidade(void)
