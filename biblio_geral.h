@@ -6,8 +6,7 @@
 #include <conio.h>  /*para usar gets e afins*/
 
 
-/* DEFINIÇÕES */
-//Organizações Entidade Civíl
+/* DEFINIÇÕES - Organizações Entidade Civíl*/
 #define enti_max   116 /*o maior tem 116 caracteres*/
 #define cnpj_max    14 /*CNPJ tem 14 numeros*/
 #define email_max  100 /*o maior tem 42*/
@@ -18,7 +17,7 @@
 #define subpre_max  25 /*o maior tinha 25*/
 #define cesta_max    4 /*como já tem numeros de 4 casas no .csv*/
 
-//Assistidos
+/* DEFINIÇÕES - Assistidos*/
 #define nome_max    55 /*o maior tem 55*/
 #define data_max    10 /*padrão DD/MM/AAAA*/
 #define cpf_max     11 /*CPF tem 11 numeros*/
@@ -30,8 +29,8 @@
 #define telecel_max 11 /*00 000000000 - sem espaço*/
 
 
-/* ESTRUTURAS */
-typedef struct //Organizações Entidade Civíl
+/* ESTRUTURAS - Organizações Entidade Civíl*/
+typedef struct
 {
 	char Entidade   [enti_max   + 1];
 	char CNPJ       [cnpj_max   + 1];
@@ -45,7 +44,8 @@ typedef struct //Organizações Entidade Civíl
 	
 } secoesEnti;
 
-typedef struct //Assistidos
+/* ESTRUTURAS - Assistidos */
+typedef struct
 {
 	char NomeCompleto [nome_max    + 1];
 	char DataNasc     [data_max    + 1];
@@ -103,27 +103,27 @@ void erro_fopen(FILE * doc)  /*verifica se fopen deu certo*/
 
 void ordena_enti(secoesEnti * ONG, int ini, int fim)  /*ordena .dat de entidades com quick_sort*/
 {
-	//variáveis locais
+	/*variáveis locais*/
 	int pivo, i, j;
 	secoesEnti aux;
 	
-	//caso o vetor só tenha um numero a função não roda
+	/*caso o vetor só tenha um numero a função não roda*/
 	if(ini < fim)
 	{
-		//definição das variáveis
+		/*definição das variáveis*/
 		pivo = fim;
 		i    = ini;
 		j    = fim;
 		
 		while(i<j)
 		{
-			//analisa os numeros do vetor, guardando o que tem que trocar
+			/*analisa os numeros do vetor, guardando o que tem que trocar*/
 			while((strcmp(ONG[i].CNPJ, ONG[pivo].CNPJ) <= 0) && i < fim)
 			i++;
 			while(strcmp(ONG[j].CNPJ, ONG[pivo].CNPJ) > 0)
 			j--;
 			
-			//troca o que tem q trocar
+			/*troca o que tem q trocar*/
 			if(i<j)
 			{
 				aux    = ONG[i];
@@ -131,12 +131,13 @@ void ordena_enti(secoesEnti * ONG, int ini, int fim)  /*ordena .dat de entidades
 				ONG[j] =  aux  ;
 			}
 		}
-		//quando acaba as trocas, muda o pivo
+		
+		/*quando acaba as trocas, muda o pivo*/
 		aux       = ONG[pivo];
 		ONG[pivo] =   ONG[i] ;
 		ONG[i]    =    aux   ;
 		
-		//refaz a função nos dois lados do vetor
+		/*refaz a função nos dois lados do vetor*/
 		ordena_enti(ONG, ini, i-1);
 		ordena_enti(ONG, i+1, fim);
 	}
@@ -144,27 +145,27 @@ void ordena_enti(secoesEnti * ONG, int ini, int fim)  /*ordena .dat de entidades
 
 void ordena_assis(secoesAssis * Pessoa, int ini, int fim)  /*ordena .dat de assistidos com quick_sort*/
 {
-	//variáveis locais
+	/*variáveis locais*/
 	int pivo, i, j;
 	secoesAssis aux;
 	
-	//caso o vetor só tenha um numero a função não roda
+	/*caso o vetor só tenha um numero a função não roda*/
 	if(ini < fim)
 	{
-		//definição das variáveis
+		/*definição das variáveis*/
 		pivo = fim;
 		i    = ini;
 		j    = fim;
 		
 		while(i<j)
 		{
-			//analisa os numeros do vetor, guardando o que tem que trocar
+			/*analisa os numeros do vetor, guardando o que tem que trocar*/
 			while((strcmp(Pessoa[i].CPF, Pessoa[pivo].CPF) <= 0) && i < fim)
 			i++;
 			while(strcmp(Pessoa[j].CPF, Pessoa[pivo].CPF) > 0)
 			j--;
 			
-			//troca o que tem q trocar
+			/*troca o que tem q trocar*/
 			if(i<j)
 			{
 				aux       = Pessoa[i];
@@ -172,12 +173,13 @@ void ordena_assis(secoesAssis * Pessoa, int ini, int fim)  /*ordena .dat de assi
 				Pessoa[j] =  aux  ;
 			}
 		}
-		//quando acaba as trocas, muda o pivo
+		
+		/*quando acaba as trocas, muda o pivo*/
 		aux          = Pessoa[pivo];
 		Pessoa[pivo] =   Pessoa[i] ;
 		Pessoa[i]    =    aux   ;
 		
-		//refaz a função nos dois lados do vetor
+		/*refaz a função nos dois lados do vetor*/
 		ordena_assis(Pessoa, ini, i-1);
 		ordena_assis(Pessoa, i+1, fim);
 	}

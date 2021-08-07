@@ -17,7 +17,7 @@ int main()
 	
 	while(!feof(csv)) /*looping para ler o .csv e copiar para a estrutura*/
 	{
-		//limpa a estrutura
+		/*limpa a estrutura*/
 		memset(Pessoa.NomeCompleto,   '\0', sizeof(Pessoa.NomeCompleto));
 		memset(Pessoa.DataNasc,       '\0', sizeof(Pessoa.DataNasc));
 		memset(Pessoa.CPF,            '\0', sizeof(Pessoa.CPF));
@@ -29,7 +29,7 @@ int main()
 		memset(Pessoa.TelefoneCel,    '\0', sizeof(Pessoa.TelefoneCel));
 		Pessoa.PossuiPet = '\0';
 		
-		//nome completo
+		/*nome completo*/
 		i = 0;
 		do
 		{
@@ -43,7 +43,7 @@ int main()
 		Pessoa.NomeCompleto[i] = '\0';
 		printf("%s ", Pessoa.NomeCompleto);
 		
-		//data de nascimento
+		/*data de nascimento*/
 		i = 0;
 		do
 		{
@@ -55,7 +55,7 @@ int main()
 		Pessoa.DataNasc[i] = '\0';
 		printf("%s ", Pessoa.DataNasc);
 		
-		//cpf
+		/*cpf*/
 		i = 0;
 		do
 		{
@@ -67,7 +67,7 @@ int main()
 		Pessoa.CPF[i] = '\0';
 		printf("%s ", Pessoa.CPF);
 		
-		//município
+		/*município*/
 		i = 0;
 		do
 		{
@@ -79,7 +79,7 @@ int main()
 		Pessoa.Municipio[i] = '\0';
 		printf("%s ", Pessoa.Municipio);
 		
-		//logradouro
+		/*logradouro*/
 		i = 0;
 		do
 		{
@@ -91,7 +91,7 @@ int main()
 		Pessoa.Logradouro[i] = '\0';
 		printf("%s ", Pessoa.Logradouro);
 		
-		//número
+		/*número*/
 		i = 0;
 		do
 		{
@@ -103,7 +103,7 @@ int main()
 		Pessoa.Numero[i] = '\0';
 		printf("%s ", Pessoa.Numero);
 		
-		//complemento
+		/*complemento*/
 		i = 0;
 		do
 		{
@@ -115,7 +115,7 @@ int main()
 		Pessoa.Complemento[i] = '\0';
 		printf("%s ", Pessoa.Complemento);
 		
-		//bairro
+		/*bairro*/
 		i = 0;
 		do
 		{
@@ -127,7 +127,7 @@ int main()
 		Pessoa.Bairro[i] = '\0';
 		printf("%s ", Pessoa.Bairro);
 		
-		//telefone celular
+		/*telefone celular*/
 		i = 0;
 		do
 		{
@@ -139,12 +139,12 @@ int main()
 		Pessoa.TelefoneCel[i] = '\0';
 		printf("%s ", Pessoa.TelefoneCel);
 		
-		//possui pet
+		/*possui pet*/
 		Pessoa.PossuiPet = fgetc(csv);
 		printf("%c\n\n", Pessoa.PossuiPet);
 		item = fgetc(csv); /*lê a quebra de linha e descarta*/
 		
-		//copia os dados da estrutura no .dat
+		/*copia os dados da estrutura no .dat*/
 		fwrite(&Pessoa, sizeof(Pessoa), 1, dat);
 	}
 	

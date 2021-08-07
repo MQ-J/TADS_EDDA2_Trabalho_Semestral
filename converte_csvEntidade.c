@@ -8,9 +8,9 @@ int main()
 	decoracao();  /*habilita acento e cor do programa*/
 	
 	secoesEnti ONG;    /*variável das estruturas*/
-	int i;         /*contador para as estruturas*/
-	char item;     /*pega os caracteres do .csv para a estrutura*/
-	char quant[5]; /*máximo de 1000 cestas*/
+	int i;             /*contador para as estruturas*/
+	char item;         /*pega os caracteres do .csv para a estrutura*/
+	char quant[5];     /*máximo de 1000 cestas*/
 	
 	FILE * csv = fopen("OSC.csv", "r");  erro_fopen(csv); /*abre .csv para ler*/
 	FILE * dat = fopen("OSC.dat", "wb"); erro_fopen(dat); /*cria .dat novo*/
@@ -18,7 +18,7 @@ int main()
 	
 	while(!feof(csv)) /*looping para ler o .csv e copiar para a estrutura*/
 	{
-		//limpa a estrutura
+		/*limpa a estrutura*/
 		memset(ONG.Entidade,   '\0', sizeof(ONG.Entidade));
 		memset(ONG.CNPJ,       '\0', sizeof(ONG.CNPJ));
 		memset(ONG.Email,      '\0', sizeof(ONG.Email));
@@ -29,7 +29,7 @@ int main()
 		memset(ONG.Subpre,     '\0', sizeof(ONG.Subpre));
 		ONG.Quant_cesta = 0;
 		
-		//entidade
+		/*entidade*/
 		i = 0;
 		do
 		{
@@ -41,7 +41,7 @@ int main()
 		ONG.Entidade[i] = '\0';
 		printf("%s ", ONG.Entidade);
 		
-		//cnpj
+		/*cnpj*/
 		i = 0;
 		do
 		{
@@ -53,7 +53,7 @@ int main()
 		ONG.CNPJ[i] = '\0';
 		printf("%s ", ONG.CNPJ);
 		
-		//email
+		/*email*/
 		i = 0;
 		do
 		{
@@ -65,7 +65,7 @@ int main()
 		ONG.Email[i] = '\0';
 		printf("%s ", ONG.Email);
 		
-		//telefone
+		/*telefone*/
 		i = 0;
 		do
 		{
@@ -77,7 +77,7 @@ int main()
 		ONG.Telefone[i] = '\0';
 		printf("%s ", ONG.Telefone);
 
-		//comunidade
+		/*comunidade*/
 		i = 0;
 		do
 		{
@@ -89,7 +89,7 @@ int main()
 		ONG.Comunidade[i] = '\0';
 		printf("%s ", ONG.Comunidade);
 		
-		//endereço
+		/*endereço*/
 		i = 0;
 		do
 		{
@@ -101,7 +101,7 @@ int main()
 		ONG.Endereco[i] = '\0';
 		printf("%s ", ONG.Endereco);
 		
-		//tipo
+		/*tipo*/
 		i = 0;
 		do
 		{
@@ -113,7 +113,7 @@ int main()
 		ONG.Tipo[i] = '\0';
 		printf("%s ", ONG.Tipo);
 		
-		//subprefeitura
+		/*subprefeitura*/
 		i = 0;
 		do
 		{
@@ -125,7 +125,7 @@ int main()
 		ONG.Subpre[i] = '\0';
 		printf("%s ", ONG.Subpre);
 		
-		//cestas
+		/*cestas*/
 		for(i=0; i<=cesta_max; i++)
 		{
 			item = fgetc(csv);
@@ -135,7 +135,7 @@ int main()
 		ONG.Quant_cesta = atoi(quant);
 		printf("%i\n\n", ONG.Quant_cesta);
 		
-		//copia os dados da estrutura no .dat
+		/*copia os dados da estrutura no .dat*/
 		fwrite(&ONG, sizeof(ONG), 1, dat);
 	}
 	

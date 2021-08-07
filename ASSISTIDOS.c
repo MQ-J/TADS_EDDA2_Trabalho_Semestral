@@ -2,10 +2,10 @@
 #include "biblio_geral.h"
 
 /* FUNÇÕES */
-void consulta_assistido(void); //operação de consulta
-void limpa_assistido   (void); //previnir lixo de memória
-void preenche_assistido(void); //operação de cadastro
-void confirma_assistido(void); //operação de cadastro
+void consulta_assistido(void); /*operação de consulta*/
+void limpa_assistido   (void); /*previnir lixo de memória*/
+void preenche_assistido(void); /*cadastro - preenche estrutura local*/
+void confirma_assistido(void); /*cadastro - salva no arquivo .dat*/
 
 /* VARIÁVEL DA ESTRUTURA */
 secoesAssis Pessoa;
@@ -13,13 +13,13 @@ secoesAssis Pessoa;
 /* CORPO DO PROGRAMA */
 int main()
 {
-	//cor da tela e acentos
+	/*cor da tela e acentos*/
 	decoracao();
 	
-	//variáveis
+	/*variáveis locais*/
 	char op;
 	
-	//menu
+	/*menu*/
 	do
 	{
 		system("cls");
@@ -44,21 +44,21 @@ int main()
 
 void consulta_assistido()
 {
-	//variáveis
+	/*variáveis locais*/
 	secoesAssis * Pessoa_consulta;
 	int quant;
 	char CPF [cpf_max   + 1];
 	int i;
 	
-	//malloc da estrutura
-	FILE * dat = fopen("ASSISTIDOS.dat", "rb"); erro_fopen(dat); /*abre .dat como binário*/
-	fseek(dat, 0, SEEK_END);                              /*para o ftell funcionar*/
+	/*malloc da estrutura*/
+	FILE * dat = fopen("ASSISTIDOS.dat", "rb"); erro_fopen(dat);                             /*abre .dat como binário*/
+	fseek(dat, 0, SEEK_END);                                                                 /*para o ftell funcionar*/
 	Pessoa_consulta = (secoesAssis*) malloc(ftell(dat)); erro_malloc_assis(Pessoa_consulta); /*malloc da estrutura*/
 	
-	//define numero de estruturas
-	quant = ftell(dat) / sizeof(secoesAssis);   //printf("numero de pessoas: %i\n\n", quant); getch();
+	/*define numero de estruturas*/
+	quant = ftell(dat) / sizeof(secoesAssis);
 	
-	//limpa estrutura
+	/*limpa estrutura*/
 	memset(Pessoa_consulta->NomeCompleto, '\0', sizeof(Pessoa_consulta->NomeCompleto));
 	memset(Pessoa_consulta->DataNasc,     '\0', sizeof(Pessoa_consulta->DataNasc));
 	memset(Pessoa_consulta->CPF,          '\0', sizeof(Pessoa_consulta->CPF));
@@ -70,15 +70,15 @@ void consulta_assistido()
 	memset(Pessoa_consulta->TelefoneCel,  '\0', sizeof(Pessoa_consulta->TelefoneCel));
 	Pessoa_consulta->PossuiPet = '\0';
 	
-	//preenche estrutura
-	fseek(dat, 0, SEEK_SET);                /*para o fread funcionar*/
+	/*preenche estrutura*/
+	fseek(dat, 0, SEEK_SET);                                 /*para o fread funcionar*/
 	fread(Pessoa_consulta, sizeof(secoesAssis), quant, dat); /*copia valores do .dat pra a estrutura*/
-	fclose(dat);                            /*fecha .dat*/
+	fclose(dat);                                             /*fecha .dat*/
 	
-	//ordena estrutura
+	/*ordena estrutura*/
 	ordena_assis(Pessoa_consulta, 0, quant-1);
 	
-	//pesquisa cpf
+	/*pesquisa cpf*/
 	printf("Qual cpf vc quer procurar?\n");
 	fflush(stdin); gets(CPF);
 	if (strcmp(CPF, "todos") == 0)
@@ -102,16 +102,17 @@ void consulta_assistido()
 		}
 	}
 	
-	//pausa na tela
+	/*pausa na tela*/
 	printf("\n\nDigite qualquer tecla para voltar");
 	getche();
 	
-	//libera o espaço alocado
+	/*libera o espaço alocado*/
 	free(Pessoa_consulta);
 }
 
 void limpa_assistido(void)
 {
+	/*limpa estrutura*/
 	memset(Pessoa.NomeCompleto, '\0', sizeof(Pessoa.NomeCompleto));
 	memset(Pessoa.DataNasc,     '\0', sizeof(Pessoa.DataNasc));
 	memset(Pessoa.CPF,          '\0', sizeof(Pessoa.CPF));
@@ -126,26 +127,30 @@ void limpa_assistido(void)
 
 void preenche_assistido(void)
 {
+	/*variáveis locais*/
 	int i;
 	
-	printf("Digite o nome completo: ");      fflush(stdin); gets(Pessoa.NomeCompleto);
-	printf("Digite a data de nascimento: "); fflush(stdin); gets(Pessoa.DataNasc);
-	printf("Digite o CPF: ");                for(i=0; i<cpf_max; i++) Pessoa.CPF[i] = getche(); Pessoa.CPF[i] = '\0';
-	printf("\nDigite o município: ");        fflush(stdin); gets(Pessoa.Municipio);
-	printf("Digite o logradouro: ");         fflush(stdin); gets(Pessoa.Logradouro);
-	printf("Digite o numero: ");             fflush(stdin); gets(Pessoa.Numero);
-	printf("Digite o complemento: ");        fflush(stdin); gets(Pessoa.Complemento);
-	printf("Digite o bairro: ");             fflush(stdin); gets(Pessoa.Bairro);
-	printf("Digite o telefone celular: ");   for(i=0; i<telecel_max; i++) Pessoa.TelefoneCel[i] = getche(); Pessoa.TelefoneCel[i] = '\0';
-	printf("\nPossui pet? [S ou N]: ");        fflush(stdin); scanf("%c", &Pessoa.PossuiPet);
+	/*pede dados do novo assistido*/
+	printf("Nome completo:          "); fflush(stdin); gets(Pessoa.NomeCompleto);
+	printf("Data de nascimento:     "); for(i=0; i<data_max; i++)                Pessoa.DataNasc[i] = getche(); Pessoa.DataNasc[i] = '\0';
+	printf("\nCPF:                  "); printf("  ");  for(i=0; i<cpf_max; i++)  Pessoa.CPF[i] = getche();      Pessoa.CPF[i] = '\0';
+	printf("\nMunicípio:            "); printf("  ");  fflush(stdin); gets(Pessoa.Municipio);
+	printf("Logradouro:             "); fflush(stdin); gets(Pessoa.Logradouro);
+	printf("Número:                 "); fflush(stdin); gets(Pessoa.Numero);
+	printf("Complemento:            "); fflush(stdin); gets(Pessoa.Complemento);
+	printf("Bairro:                 "); fflush(stdin); gets(Pessoa.Bairro);
+	printf("Telefone celular:       "); for(i=0; i<telecel_max; i++) Pessoa.TelefoneCel[i] = getche(); Pessoa.TelefoneCel[i] = '\0';
+	printf("\nPossui pet? [S ou N]: "); printf("  ");  fflush(stdin); scanf("%c", &Pessoa.PossuiPet);
 	printf("----------------------------\n");
 }
 
 void confirma_assistido(void)
 {
+	/*variáveis locais e abertura do arquivo*/
 	char confirma;
 	FILE * dat = fopen("ASSISTIDOS.dat", "ab"); erro_fopen(dat);
 	
+	/*salva assistido no arquivo ou não*/
 	printf("Salvar assistido? [s = sim] [n = não]\n");
 	fflush(stdin); confirma = getchar();
 	switch(confirma)
@@ -154,5 +159,7 @@ void confirma_assistido(void)
 		case 's': case 'S': fwrite(&Pessoa, sizeof(Pessoa), 1, dat);  break;
 		default: printf("opção inválida!\n"); getch(); confirma_assistido();
 	}
+	
+	/*fecha arquivo*/
 	fclose(dat);
 }
