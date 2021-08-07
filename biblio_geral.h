@@ -15,7 +15,7 @@
 #define comuni_max  25 /*o maior tem 25*/
 #define endere_max  93 /*o maior tem 93*/
 #define tipo_max    29 /*o maior tinha 29*/
-#define subpre_max  18 /*o maior tinha 18*/
+#define subpre_max  25 /*o maior tinha 25*/
 #define cesta_max    4 /*como já tem numeros de 4 casas no .csv*/
 
 //Assistidos

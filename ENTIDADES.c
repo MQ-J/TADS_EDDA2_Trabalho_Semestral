@@ -11,7 +11,7 @@ void confirma_entidade(void); //operação de cadastro
 
 /* VARIÁVEIS GLOBAIS */
 secoesEnti ONG; //variável das estruturas
-int erro = 0;       //valida dados digitados
+int erro;       //valida dados digitados
 
 /* CORPO DO PROGRAMA */
 int main()
@@ -128,6 +128,7 @@ void limpa_entidade(void)
 void preenche_entidade(void)
 {
 	int i;
+	erro = 0;
 	
 	printf("Digite o nome da Entidade: ");           fflush(stdin); gets(ONG.Entidade);
 	printf("Digite o CNPJ da Entidade: ");           for(i=0; i<cnpj_max; i++)   ONG.CNPJ[i] = getche();     ONG.CNPJ[i] = '\0';
@@ -140,8 +141,9 @@ void preenche_entidade(void)
 	printf("----------------------------\n");
 	switch(erro)
 	{
-		case 1: printf("tipo inválido\n\n");          getch(); preenche_entidade(); break;
-		case 2: printf("subprefeitura inválida\n\n"); getch(); preenche_entidade(); break;
+		case 1: printf("tipo inválido\n\n");                  getch(); preenche_entidade(); break;
+		case 2: printf("subprefeitura inválida\n\n");         getch(); preenche_entidade(); break;
+		case 3: printf("tipo e subprefeitura inválidos\n\n"); getch(); preenche_entidade(); break;
 	}
 }
 
@@ -166,7 +168,7 @@ void valida_tipo(char * tipo)
 		case 2083: /*Pessoas em situação de rua*/ case 2155: /*Imigrantes/refugiados*/
 		case 2058: /*Minorias étnico-raciais*/    case 2885: /*Egressos do sistema prisional*/
 		break;
-		default: erro = 1;
+		default: erro = erro + 1;
 	}
 }
 
@@ -183,39 +185,39 @@ void valida_subpre(char * subpre)
 	switch(soma)
 	{
 		case 1022: /*Aricanduva*/
-		case 564: /*Butantã*/
+		case 564:  /*Butantã*/
 		case 1041: /*Campo Limpo*/
 		case 1600: /*Capela do Socorro*/
-		case 910: /*Casa Verde*/
+		case 910:  /*Casa Verde*/
 		case 1188: /*Cidade Ademar*/
 		case 1645: /*Cidade Tiradentes*/
-		/*Ermelino Matarazzo*/
-		/*Freguesia do Ó*/
-		/*Guaianases*/
-		/*Ipiranga*/
-		/*Itaim Paulista*/
-		/*Itaquera*/
-		/*Jabaquara*/
-		/*Jaçanã/Tremembé*/
-		/*Lapa*/
-		case 940: /*M'Boi Mirim*/
-		/*Mooca*/
-		/*Parelheiros*/
-		/*Penha*/
-		/*Perus*/
-		/*Pinheiros*/
-		/*Pirituba/Jaraguá*/
-		/*Santana/Tucuruvi*/
-		/*Santo Amaro*/
-		/*São Mateus*/
-		/*São Miguel*/
-		/*Sapopemba*/
-		/*Sé*/
-		/*Vila Maria/Vila Guilherme*/
-		/*Vila Mariana*/
-		/*Vila Prudente*/
+		case 1812: /*Ermelino Matarazzo*/
+		case 1166: /*Freguesia do Ó*/
+		case 1025: /*Guaianases*/
+		case 811:  /*Ipiranga*/
+		case 1367: /*Itaim Paulista*/
+		case 828:  /*Itaquera*/
+		case 904:  /*Jabaquara*/
+		case 836:  /*Jaçanã/Tremembé*/
+		case 382:  /*Lapa*/
+		case 940:  /*M'Boi Mirim*/
+		case 495:  /*Mooca*/
+		case 1150: /*Parelheiros*/
+		case 492:  /*Penha*/
+		case 527:  /*Perus*/
+		case 945:  /*Pinheiros*/
+		case 1385: /*Pirituba/Jaraguá*/
+		case 1628: /*Santana/Tucuruvi*/
+		case 1045: /*Santo Amaro*/
+		case 791:  /*São Mateus*/
+		case 779:  /*São Miguel*/
+		case 920:  /*Sapopemba*/
+		case -43:  /*Sé*/
+		case 2323: /*Vila Maria/Vila Guilherme*/
+		case 1125: /*Vila Mariana*/
+		case 1267: /*Vila Prudente*/
 		break;
-		default: erro = 2;
+		default: erro = erro + 2;
 	}
 }
 
