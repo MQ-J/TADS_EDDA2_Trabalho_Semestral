@@ -14,6 +14,7 @@ int main()
 {
 	/*cor da tela e acentos*/
 	decoracao();
+	system("mode 61, 5");
 	
 	/*variáveis locais*/
 	char email[email_max  + 1]; /*para login no sistema*/
@@ -37,10 +38,11 @@ int main()
 	/*menu de opções*/
 	do
 	{
+		system("mode 35, 20");
 		system("cls");
-		printf("----------------------------\n");
-		printf("AÇÃO SOCIAL CIDADE SOLIDÁRIA\n");
-		printf("----------------------------\n");
+		printf("-----------------------------------\n");
+		printf("   AÇÃO SOCIAL CIDADE SOLIDÁRIA    \n");
+		printf("-----------------------------------\n");
 		printf(" 1 - ENTIDADES\n");
 		printf(" 2 - ASSISTIDOS\n");
 		printf(" 3 - DONATIVOS\n");

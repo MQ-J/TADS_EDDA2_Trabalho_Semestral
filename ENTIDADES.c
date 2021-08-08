@@ -25,10 +25,11 @@ int main()
 	/*menu*/
 	do
 	{
+		system("mode 35, 20");
 		system("cls");
-		printf("------------------------------\n");
-		printf("          ENTIDADES           \n");
-		printf("------------------------------\n");
+		printf("-----------------------------------\n");
+		printf("             ENTIDADES             \n");
+		printf("-----------------------------------\n");
 		printf("1 - Consulta\n");
 		printf("2 - Cadastro\n");
 		printf("3 - Reseta lista de entidades\n");
@@ -38,7 +39,7 @@ int main()
 		{
 			case '1': consulta_entidade(); break;
 			case '2': limpa_entidade(); preenche_entidade(); confirma_entidade(); break;
-			case '3': system("converte_csvEntidade.exe"); getch(); break;
+			case '3': system("mode 50, 465"); system("converte_csvEntidade.exe"); getch(); break;
 			case '0': return(0);
 		}
 	}
@@ -84,6 +85,7 @@ void consulta_entidade()
 	fflush(stdin); gets(CNPJ);
 	if (strcmp(CNPJ, "todos") == 0)
 	{
+		system("mode 50, 500");
 		for(i=0; i<quant; i++)
 		{
 			printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %i |\n\n", ONG_consulta[i].Entidade, ONG_consulta[i].CNPJ, ONG_consulta[i].Email, ONG_consulta[i].Telefone, ONG_consulta[i].Comunidade, ONG_consulta[i].Endereco, ONG_consulta[i].Tipo, ONG_consulta[i].Subpre, ONG_consulta[i].Quant_cesta);
@@ -132,6 +134,7 @@ void preenche_entidade(void)
 	erro = 0;
 	
 	/*pede dados da nova entidade*/
+	system("mode 100, 12");
 	printf("Nome da Entidade: "); fflush(stdin); gets(ONG.Entidade);
 	printf("CNPJ:             "); for(i=0; i<cnpj_max; i++)   ONG.CNPJ[i] = getche();     ONG.CNPJ[i] = '\0';
 	printf("\nEmail:          "); printf("  ");  fflush(stdin); gets(ONG.Email);

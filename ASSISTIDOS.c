@@ -22,10 +22,11 @@ int main()
 	/*menu*/
 	do
 	{
+		system("mode 35, 20");
 		system("cls");
-		printf("------------------------------\n");
-		printf("          ASSISTIDOS          \n");
-		printf("------------------------------\n");
+		printf("-----------------------------------\n");
+		printf("            ASSISTIDOS             \n");
+		printf("-----------------------------------\n");
 		printf("1 - Consulta\n");
 		printf("2 - Cadastro\n");
 		printf("3 - Reseta lista de assistidos\n");
@@ -35,7 +36,7 @@ int main()
 		{
 			case '1': consulta_assistido(); break;
 			case '2': limpa_assistido(); preenche_assistido(); confirma_assistido(); break;
-			case '3': system("converte_csvAssistido.exe"); getch(); break;
+			case '3': system("mode 50, 4500"); system("converte_csvAssistido.exe"); getch(); break;
 			case '0': return(0);
 		}
 	}
@@ -83,6 +84,7 @@ void consulta_assistido()
 	fflush(stdin); gets(CPF);
 	if (strcmp(CPF, "todos") == 0)
 	{
+		system("mode 50, 4500");
 		for(i=0; i<quant; i++)
 		{
 			printf("\n%s | %s | %s | %s | %s | %s | %s | %s | %s | %c |\n\n", Pessoa_consulta[i].NomeCompleto, Pessoa_consulta[i].DataNasc, Pessoa_consulta[i].CPF, Pessoa_consulta[i].Municipio, Pessoa_consulta[i].Logradouro, Pessoa_consulta[i].Numero, Pessoa_consulta[i].Complemento, Pessoa_consulta[i].Bairro, Pessoa_consulta[i].TelefoneCel, Pessoa_consulta[i].PossuiPet);
@@ -131,6 +133,7 @@ void preenche_assistido(void)
 	int i;
 	
 	/*pede dados do novo assistido*/
+	system("mode 100, 13");
 	printf("Nome completo:          "); fflush(stdin); gets(Pessoa.NomeCompleto);
 	printf("Data de nascimento:     "); for(i=0; i<data_max; i++)                Pessoa.DataNasc[i] = getche(); Pessoa.DataNasc[i] = '\0';
 	printf("\nCPF:                  "); printf("  ");  for(i=0; i<cpf_max; i++)  Pessoa.CPF[i] = getche();      Pessoa.CPF[i] = '\0';
